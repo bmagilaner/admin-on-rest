@@ -37,6 +37,8 @@ const Admin = ({
     loginPage,
     logoutButton,
     initialState,
+    loginPath='/login',
+    rootPath='/'
 }) => {
     const resources = React.Children.map(children, ({ props }) => props) || [];
     const appReducer = combineReducers({
@@ -69,12 +71,12 @@ const Admin = ({
                 <ConnectedRouter history={routerHistory}>
                     <div>
                         <Switch>
-                            <Route exact path="/login" render={({ location }) => createElement(loginPage || Login, {
+                            <Route exact path={loginPath} render={({ location }) => createElement(loginPage || Login, {
                                 location,
                                 title,
                                 theme,
                             })} />
-                            <Route path="/" render={() => createElement(appLayout || DefaultLayout, {
+                            <Route path={rootPath} render={() => createElement(appLayout || DefaultLayout, {
                                 dashboard,
                                 customRoutes,
                                 menu: createElement(menu || Menu, {
@@ -114,6 +116,8 @@ Admin.propTypes = {
     locale: PropTypes.string,
     messages: PropTypes.object,
     initialState: PropTypes.object,
+    loginPath: PropTypes.string,
+    rootPath: PropTypes.string
 };
 
 export default Admin;
