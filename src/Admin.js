@@ -38,7 +38,8 @@ const Admin = ({
     logoutButton,
     initialState,
     loginPath='/login',
-    rootPath='/'
+    rootPath='/',
+    disableSidebar=false
 }) => {
     const resources = React.Children.map(children, ({ props }) => props) || [];
     const appReducer = combineReducers({
@@ -87,6 +88,7 @@ const Admin = ({
                                 resources,
                                 title,
                                 theme,
+                                disableSidebar
                             })} />
                         </Switch>
                     </div>
@@ -117,7 +119,8 @@ Admin.propTypes = {
     messages: PropTypes.object,
     initialState: PropTypes.object,
     loginPath: PropTypes.string,
-    rootPath: PropTypes.string
+    rootPath: PropTypes.string,
+    disableSidebar: PropTypes.bool
 };
 
 export default Admin;
