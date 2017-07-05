@@ -88,11 +88,18 @@ class Layout extends Component {
             prefixedStyles.content = prefix(styles.content);
             prefixedStyles.contentSmall = prefix(styles.contentSmall);
         }
+
+        let appBar = <AppBar title={title} />
+
+        if (disableSidebar) {
+            <AppBar title={title} iconElementLeft={<span></span>}/>
+        }
+
         return (
             <MuiThemeProvider muiTheme={muiTheme}>
                 <div style={prefixedStyles.wrapper}>
                     <div style={prefixedStyles.main}>
-                        { width !== 1 && <AppBar title={title} />}
+                        { width !== 1 && appBar}
                         <div className="body" style={width === 1 ? prefixedStyles.bodySmall : prefixedStyles.body}>
                             <div style={width === 1 ? prefixedStyles.contentSmall : prefixedStyles.content}>
                                 <AdminRoutes
@@ -102,9 +109,9 @@ class Layout extends Component {
                                     dashboard={dashboard}
                                 />
                             </div>
-                            <Sidebar theme={theme}>
+                            {!disableSidebar && <Sidebar theme={theme}>
                                 {menu}
-                            </Sidebar>
+                            </Sidebar>}
                         </div>
                         <Notification />
                         {isLoading && <CircularProgress
@@ -132,6 +139,7 @@ Layout.propTypes = {
     title: PropTypes.node.isRequired,
     theme: PropTypes.object.isRequired,
     width: PropTypes.number,
+    disableSidebar: PropTypes.bool
 };
 
 Layout.defaultProps = {
