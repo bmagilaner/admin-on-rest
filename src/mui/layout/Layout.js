@@ -76,6 +76,7 @@ class Layout extends Component {
             theme,
             title,
             width,
+            disableSidebar
         } = this.props;
         const muiTheme = getMuiTheme(theme);
         if (!prefixedStyles.main) {
